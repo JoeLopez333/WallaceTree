@@ -23,8 +23,8 @@ initial begin : TEST
 	Reset = 1;
 	Run = 0;
 	ClearA_LoadB = 1;
-	MUR = 0101;
-	MUD = 0101;
+	MUR = 00000011;
+	MUD = 00000010;
 	
 #20 ;
 	
