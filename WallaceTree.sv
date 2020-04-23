@@ -32,11 +32,11 @@ module WallaceTree (input logic Clk, Reset, Run, ClearA_LoadB,
 //full_adder fa3(.x(ha2s),     .y(pp[3][0]), .cin(pp[2][1]), .s(z2[3]), .c(z1[4]));
 //full_adder fa4(.x(pp[1][1]), .y(pp[0][2]), .cin(0),      .s(z2[2]), .c(z1[3]));
 
-wire fas[100:0];
-wire has[100:0];
-wire fac[100:0];
-wire hac[100:0];
-wire dot[50:0];
+wire fas[200:0];
+wire has[200:0];
+wire fac[200:0];
+wire hac[200:0];
+wire dot[200:0];
 
 /*stage 1******************/ 
 assign dot[0] = pp[0][0];
@@ -132,28 +132,28 @@ full_adder fa67(.x(pp[12][13]), .y(pp[13][12]), .cin(pp[14][11]), .s(fas[67]), .
 full_adder fa68(.x(pp[12][14]), .y(pp[13][13]), .cin(pp[14][12]), .s(fas[68]), .c(fac[68]));
 full_adder fa69(.x(pp[12][15]), .y(pp[13][14]), .cin(pp[14][13]), .s(fas[69]), .c(fac[69]));
 half_adder ha9( .x(pp[13][15]), .y(pp[14][14]), .s(has[9]), .c(hac[9]));
-assign dot[8] = pp[14][15];
+assign dot[9] = pp[14][15];
 
-assign dot[9]  = pp[15][0];
-assign dot[10] = pp[15][1];
-assign dot[11] = pp[15][2];
-assign dot[12] = pp[15][3];
-assign dot[13] = pp[15][4];
-assign dot[14] = pp[15][5];
-assign dot[15] = pp[15][6];
-assign dot[16] = pp[15][7];
-assign dot[17] = pp[15][8];
-assign dot[18] = pp[15][9];
-assign dot[19] = pp[15][10];
-assign dot[20] = pp[15][11];
-assign dot[21] = pp[15][12];
-assign dot[22] = pp[15][13];
-assign dot[23] = pp[15][14];
-assign dot[24] = pp[15][15];
+assign dot[10]  = pp[15][0];
+assign dot[11] = pp[15][1];
+assign dot[12] = pp[15][2];
+assign dot[13] = pp[15][3];
+assign dot[14] = pp[15][4];
+assign dot[15] = pp[15][5];
+assign dot[16] = pp[15][6];
+assign dot[17] = pp[15][7];
+assign dot[18] = pp[15][8];
+assign dot[19] = pp[15][9];
+assign dot[20] = pp[15][10];
+assign dot[21] = pp[15][11];
+assign dot[22] = pp[15][12];
+assign dot[23] = pp[15][13];
+assign dot[24] = pp[15][14];
+assign dot[25] = pp[15][15];
 /***********************/
 /*stage 2***************/
-assign dot[25] = dot[0];
-assign dot[26] = has[0];
+assign dot[26] = dot[0];
+assign dot[27] = has[0];
 half_adder ha10(.x(fas[0]), .y(hac[0]), .s(has[10]), .c(hac[10]));
 full_adder fa70(.x(fas[1]),  .y(fac[0]),  .cin(dot[2]), .s(fas[70]), .c(fac[70]));
 full_adder fa71(.x(fas[2]),  .y(fac[1]),  .cin(has[2]), .s(fas[71]), .c(fac[71]));
@@ -170,11 +170,11 @@ full_adder fa81(.x(fas[12]), .y(fac[11]), .cin(fas[24]), .s(fas[81]), .c(fac[81]
 full_adder fa82(.x(fas[13]), .y(fac[12]), .cin(fas[25]), .s(fas[82]), .c(fac[82]));
 full_adder fa83(.x(has[1]),  .y(fac[13]), .cin(fas[26]), .s(fas[83]), .c(fac[83]));
 full_adder fa84(.x(dot[1]),  .y(hac[1]),  .cin(fas[27]), .s(fas[84]), .c(fac[84]));
-assign dot[27] = fas[28];
-assign dot[28] = has[3];
-assign dot[29] = dot[3];
+assign dot[28] = fas[28];
+assign dot[29] = has[3];
+assign dot[30] = dot[3];
 
-assign dot[30] = hac[2];
+assign dot[31] = hac[2];
 half_adder ha11(.x(fac[14]), .y(dot[4]), .s(has[11]), .c(hac[11]));
 half_adder ha12(.x(fac[15]), .y(has[4]), .s(has[12]), .c(hac[12]));
 full_adder fa85(.x(fac[16]),  .y(fas[28]),  .cin(hac[4]), .s(fas[85]), .c(fac[85]));
@@ -194,8 +194,8 @@ half_adder ha13(.x(fas[41]), .y(fac[40]), .s(has[13]), .c(hac[13]));
 half_adder ha14(.x(has[5]), .y(fac[41]), .s(has[14]), .c(hac[14]));
 half_adder ha15(.x(dot[5]), .y(hac[5]), .s(has[15]), .c(hac[15]));
 
-assign dot[31] = dot[6];
-assign dot[32] = has[6];
+assign dot[32] = dot[6];
+assign dot[33] = has[6];
 half_adder ha16(.x(fas[42]), .y(hac[6]), .s(has[16]), .c(hac[16]));
 full_adder fa98(.x(fas[43]), .y(fac[42]),  .cin(dot[8]), .s(fas[98]), .c(fac[98]));
 full_adder fa99(.x(fas[44]), .y(fac[43]),  .cin(has[8]), .s(fas[99]), .c(fac[99]));
@@ -212,16 +212,114 @@ full_adder fa109(.x(fas[54]), .y(fac[53]),  .cin(fas[65]), .s(fas[109]), .c(fac[
 full_adder fa110(.x(fas[55]), .y(fac[54]),  .cin(fas[66]), .s(fas[110]), .c(fac[110]));
 full_adder fa111(.x(has[7]),  .y(fac[55]),  .cin(fas[67]), .s(fas[111]), .c(fac[111]));
 full_adder fa112(.x(dot[7]),  .y(hac[7]),   .cin(fas[68]), .s(fas[112]), .c(fac[112]));
-assign dot[33] = fas[69];
-assign dot[34] = has[9];
-assign dot[35] = dot[9];
+assign dot[34] = fas[69];
+assign dot[35] = has[9];
+assign dot[36] = dot[9];
 
 //last two rows of dots will carry over a few times, keep track of them
 
 /*stage 3********/
 //dot[25], dot[26]
-assign dot[36] = has[10];
-half_adder ha17(.x(fas[42]), .y(hac[6]), .s(has[16]), .c(hac[16]));
+assign dot[37] = has[10];
+half_adder ha17(.x(fas[70]), .y(hac[10]), .s(has[17]), .c(hac[17]));
+half_adder ha18(.x(fas[71]), .y(fac[70]), .s(has[18]), .c(hac[18]));
+full_adder fa113(.x(fas[72]),  .y(fac[71]),   .cin(dot[31]), .s(fas[113]), .c(fac[113]));
+full_adder fa114(.x(fas[73]),  .y(fac[72]),   .cin(has[11]), .s(fas[114]), .c(fac[114]));
+full_adder fa115(.x(fas[74]),  .y(fac[73]),   .cin(has[12]), .s(fas[115]), .c(fac[115]));
+full_adder fa116(.x(fas[75]),  .y(fac[74]),   .cin(fas[85]), .s(fas[116]), .c(fac[116]));
+full_adder fa117(.x(fas[76]),  .y(fac[75]),   .cin(fas[86]), .s(fas[117]), .c(fac[117]));
+full_adder fa118(.x(fas[77]),  .y(fac[76]),   .cin(fas[87]), .s(fas[118]), .c(fac[118]));
+full_adder fa119(.x(fas[78]),  .y(fac[77]),   .cin(fas[88]), .s(fas[119]), .c(fac[119]));
+full_adder fa120(.x(fas[79]),  .y(fac[78]),   .cin(fas[89]), .s(fas[120]), .c(fac[120]));
+full_adder fa121(.x(fas[80]),  .y(fac[79]),   .cin(fas[90]), .s(fas[121]), .c(fac[121]));
+full_adder fa122(.x(fas[81]),  .y(fac[80]),   .cin(fas[91]), .s(fas[122]), .c(fac[122]));
+full_adder fa123(.x(fas[82]),  .y(fac[81]),   .cin(fas[92]), .s(fas[123]), .c(fac[123]));
+full_adder fa124(.x(fas[83]),  .y(fac[82]),   .cin(fas[93]), .s(fas[124]), .c(fac[124]));
+full_adder fa125(.x(fas[84]),  .y(fac[83]),   .cin(fas[94]), .s(fas[125]), .c(fac[125]));
+full_adder fa126(.x(dot[28]),  .y(fac[84]),   .cin(fas[95]), .s(fas[126]), .c(fac[127]));
+half_adder ha19(.x(dot[29]), .y(fas[96]), .s(has[19]), .c(hac[19]));
+half_adder ha20(.x(dot[30]), .y(fas[97]), .s(has[20]), .c(hac[20]));
+assign dot[38] = has[13];
+assign dot[39] = has[14];
+assign dot[40] = has[15];
+
+assign dot[41] = hac[11];
+assign dot[42] = hac[12];
+half_adder ha21(.x(fac[85]), .y(dot[32]), .s(has[21]), .c(hac[21]));
+half_adder ha22(.x(fac[86]), .y(fac[86]), .s(has[22]), .c(hac[22]));
+half_adder ha23(.x(fac[87]), .y(has[16]), .s(has[23]), .c(hac[23]));
+full_adder fa127(.x(fac[88]),  .y(fas[98]),  .cin(hac[16]),  .s(fas[127]), .c(fac[127]));
+full_adder fa128(.x(fac[89]),  .y(fas[99]),  .cin(fac[98]),  .s(fas[128]), .c(fac[128]));
+full_adder fa129(.x(fac[90]),  .y(fas[100]), .cin(fac[99]),  .s(fas[129]), .c(fac[129]));
+full_adder fa130(.x(fac[91]),  .y(fas[101]), .cin(fac[100]), .s(fas[130]), .c(fac[130]));
+full_adder fa131(.x(fac[92]),  .y(fas[102]), .cin(fac[101]), .s(fas[131]), .c(fac[131]));
+full_adder fa132(.x(fac[93]),  .y(fas[103]), .cin(fac[102]), .s(fas[132]), .c(fac[132]));
+full_adder fa133(.x(fac[94]),  .y(fas[104]), .cin(fac[103]), .s(fas[133]), .c(fac[133]));
+full_adder fa134(.x(fac[95]),  .y(fas[105]), .cin(fac[104]), .s(fas[134]), .c(fac[134]));
+full_adder fa135(.x(fac[96]),  .y(fas[106]), .cin(fac[105]), .s(fas[135]), .c(fac[135]));
+full_adder fa136(.x(fac[97]),  .y(fas[107]), .cin(fac[106]), .s(fas[136]), .c(fac[136]));
+full_adder fa137(.x(hac[13]),  .y(fas[108]), .cin(fac[107]), .s(fas[137]), .c(fac[137]));
+full_adder fa138(.x(hac[14]),  .y(fas[109]), .cin(fac[108]), .s(fas[138]), .c(fac[138]));
+full_adder fa139(.x(hac[15]),  .y(fas[110]), .cin(fac[109]), .s(fas[139]), .c(fac[139]));
+half_adder ha24(.x(fas[111]), .y(fac[110]), .s(has[24]), .c(hac[24]));
+half_adder ha25(.x(fas[112]), .y(fac[111]), .s(has[25]), .c(hac[25]));
+half_adder ha26(.x(dot[34]), .y(fac[112]), .s(has[26]), .c(hac[26]));
+assign dot[43] = dot[35];
+assign dot[44] = dot[36]; 
+/***************/
+/*stage 4 **********/
+//dot[25], [26], [37]
+assign dot[45] = has[17];
+half_adder ha27(.x(has[18]), .y(hac[17]), .s(has[27]), .c(hac[27]));
+half_adder ha28(.x(fas[113]), .y(hac[18]), .s(has[28]), .c(hac[28]));
+half_adder ha29(.x(fas[114]), .y(fac[113]), .s(has[29]), .c(hac[29]));
+full_adder fa140(.x(fas[115]), .y(fac[114]), .cin(dot[41]), .s(fas[140]), .c(fac[140]));
+full_adder fa141(.x(fas[116]), .y(fac[115]), .cin(dot[42]), .s(fas[141]), .c(fac[141]));
+full_adder fa142(.x(fas[117]), .y(fac[116]), .cin(has[21]), .s(fas[142]), .c(fac[142]));
+full_adder fa143(.x(fas[118]), .y(fac[117]), .cin(has[22]), .s(fas[143]), .c(fac[143]));
+full_adder fa144(.x(fas[119]), .y(fac[118]), .cin(has[23]), .s(fas[144]), .c(fac[144]));
+full_adder fa145(.x(fas[120]), .y(fac[119]), .cin(fas[127]), .s(fas[145]), .c(fac[145]));
+full_adder fa146(.x(fas[121]), .y(fac[120]), .cin(fas[128]), .s(fas[146]), .c(fac[146]));
+full_adder fa147(.x(fas[122]), .y(fac[121]), .cin(fas[129]), .s(fas[147]), .c(fac[147]));
+full_adder fa148(.x(fas[123]), .y(fac[122]), .cin(fas[130]), .s(fas[148]), .c(fac[148]));
+full_adder fa149(.x(fas[124]), .y(fac[123]), .cin(fas[131]), .s(fas[149]), .c(fac[149]));
+full_adder fa150(.x(fas[125]), .y(fac[124]), .cin(fas[132]), .s(fas[150]), .c(fac[150]));
+full_adder fa151(.x(fas[126]), .y(fac[125]), .cin(fas[133]), .s(fas[151]), .c(fac[151]));
+full_adder fa152(.x(has[19]), .y(fac[126]), .cin(fas[134]), .s(fas[152]), .c(fac[152]));
+full_adder fa153(.x(has[20]), .y(hac[19]), .cin(fas[135]), .s(fas[153]), .c(fac[153]));
+full_adder fa154(.x(dot[38]), .y(hac[20]), .cin(fas[136]), .s(fas[154]), .c(fac[154]));
+half_adder ha30(.x(dot[39]), .y(fas[137]), .s(has[30]), .c(hac[30]));
+half_adder ha31(.x(dot[40]), .y(fas[138]), .s(has[31]), .c(hac[31]));
+assign dot[46] = fas[139];
+assign dot[47] = has[24];
+assign dot[48] = has[25];
+assign dot[49] = has[26];
+//dot[43]
+
+assign dot[50] = hac[21];
+assign dot[51] = hac[22];
+assign dot[52] = hac[23];
+assign dot[53] = fac[127];
+half_adder ha32(.x(fac[128]), .y(hac[8]), .s(has[32]), .c(hac[32])); //check first for errors
+full_adder fa155(.x(fac[129]), .y(fac[56]), .cin(dot[10]), .s(fas[155]), .c(fac[155]));
+full_adder fa156(.x(fac[130]), .y(fac[57]), .cin(dot[11]), .s(fas[156]), .c(fac[156]));
+full_adder fa157(.x(fac[131]), .y(fac[58]), .cin(dot[12]), .s(fas[157]), .c(fac[157]));
+full_adder fa158(.x(fac[132]), .y(fac[59]), .cin(dot[13]), .s(fas[158]), .c(fac[158]));
+full_adder fa159(.x(fac[133]), .y(fac[60]), .cin(dot[14]), .s(fas[159]), .c(fac[159]));
+full_adder fa160(.x(fac[134]), .y(fac[61]), .cin(dot[15]), .s(fas[160]), .c(fac[160]));
+full_adder fa161(.x(fac[135]), .y(fac[62]), .cin(dot[16]), .s(fas[161]), .c(fac[161]));
+full_adder fa162(.x(fac[136]), .y(fac[63]), .cin(dot[17]), .s(fas[162]), .c(fac[162]));
+full_adder fa163(.x(fac[137]), .y(fac[64]), .cin(dot[18]), .s(fas[163]), .c(fac[163]));
+full_adder fa164(.x(fac[138]), .y(fac[65]), .cin(dot[19]), .s(fas[164]), .c(fac[164]));
+full_adder fa165(.x(fac[139]), .y(fac[66]), .cin(dot[20]), .s(fas[165]), .c(fac[165]));
+
+
+
+
+//end on .x = 139
+
+
+
 
 
 
