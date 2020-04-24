@@ -8,6 +8,7 @@ logic [31:0] result1;
 logic [31:0] result2;
 logic [15:0] MUR;
 logic [15:0] MUD;
+logic [15:0] test, test2;
 
 WallaceTree wtree(.*);
 
@@ -20,11 +21,11 @@ initial begin : CLOCK_INIT
 end
 
 initial begin : TEST
-	Reset = 1;
-	Run = 0;
-	ClearA_LoadB = 1;
-	MUR = 00000011;
-	MUD = 00000010;
+	//Reset = 1;
+	//Run = 0;
+	//ClearA_LoadB = 1;
+	MUR = 7'b0001111;
+	MUD = 7'b0000111;
 	
 #20 ;
 	

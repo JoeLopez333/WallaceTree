@@ -2,11 +2,13 @@ module WallaceTree (input logic Clk, Reset, Run, ClearA_LoadB,
 						  input logic [15:0] MUR, MUD, //multiplier and multiplicand
 						  output logic [31:0] result,
 						  output logic [31:0] result1,
-						  output logic [31:0] result2);
+						  output logic [31:0] result2,
+						  output logic [15:0] test,
+						  output logic [15:0] test2);
 						  
 
-		logic[31:0] z1;
-		logic[31:0] z2;
+		logic[31:0] z1 = 8'b10000111;
+		logic[31:0] z2 = 8'b01100111;
 		
 		logic pp[15:0][15:0]; //partial products
 
@@ -15,6 +17,20 @@ module WallaceTree (input logic Clk, Reset, Run, ClearA_LoadB,
 			for (i = 0; i <= 15; i = i+1)
 			for (j = 0; j <= 15; j = j+1)
 			pp[j][i] <= MUR[j] & MUD[i];
+			end
+			
+		always_comb begin
+			
+			int k;
+			for (k = 0; k <= 15; k = k+1)
+			test[k] <= pp[0][k];
+			
+		end
+		always_comb begin
+			
+			int l;
+			for (l = 0; l <= 15; l = l+1)
+			test2[l] <= pp[1][l];
 			
 		end
 						  
@@ -213,7 +229,7 @@ assign dot[36] = dot[9];
 //last two rows of dots will carry over a few times, keep track of them
 
 /*stage 3********/
-//dot[25], dot[26]
+//dot[26], dot[27]
 assign dot[37] = has[10];
 half_adder ha17(.x(fas[70]), .y(hac[10]), .s(has[17]), .c(hac[17]));
 half_adder ha18(.x(fas[71]), .y(fac[70]), .s(has[18]), .c(hac[18]));
@@ -230,7 +246,7 @@ full_adder fa122(.x(fas[81]),  .y(fac[80]),   .cin(fas[91]), .s(fas[122]), .c(fa
 full_adder fa123(.x(fas[82]),  .y(fac[81]),   .cin(fas[92]), .s(fas[123]), .c(fac[123]));
 full_adder fa124(.x(fas[83]),  .y(fac[82]),   .cin(fas[93]), .s(fas[124]), .c(fac[124]));
 full_adder fa125(.x(fas[84]),  .y(fac[83]),   .cin(fas[94]), .s(fas[125]), .c(fac[125]));
-full_adder fa126(.x(dot[28]),  .y(fac[84]),   .cin(fas[95]), .s(fas[126]), .c(fac[127]));
+full_adder fa126(.x(dot[28]),  .y(fac[84]),   .cin(fas[95]), .s(fas[126]), .c(fac[126]));
 half_adder ha19(.x(dot[29]), .y(fas[96]), .s(has[19]), .c(hac[19]));
 half_adder ha20(.x(dot[30]), .y(fas[97]), .s(has[20]), .c(hac[20]));
 assign dot[38] = has[13];
@@ -262,7 +278,7 @@ assign dot[43] = dot[35];
 assign dot[44] = dot[36]; 
 /***************/
 /*stage 4 **********/
-//dot[25], [26], [37]
+//dot[26], [27], [37]
 assign dot[45] = has[17];
 half_adder ha27(.x(has[18]), .y(hac[17]), .s(has[27]), .c(hac[27]));
 half_adder ha28(.x(fas[113]), .y(hac[18]), .s(has[28]), .c(hac[28]));
@@ -313,7 +329,7 @@ full_adder fa169(.x(dot[36]), .y(hac[9]), .cin(dot[24]), .s(fas[169]), .c(fac[16
 assign dot[54] = dot[25];
 /**************/
 /*stage 5 *****/
-//dot[25], [26], [37], [45]
+//dot[26], [27], [37], [45]
 assign dot[55] = has[27];
 half_adder ha33(.x(has[28]), .y(hac[27]), .s(has[33]), .c(hac[33]));
 half_adder ha34(.x(has[29]), .y(hac[28]), .s(has[34]), .c(hac[34]));
@@ -343,7 +359,7 @@ assign dot[56] = fas[169];
 //dot[54]
 /*************/
 /*stage 6 ****/
-//dot[25], [26], [37], [45], [55]
+//dot[26], [27], [37], [45], [55]
 assign dot[57] = has[33];
 half_adder ha42(.x(has[34]), .y(hac[33]), .s(has[42]), .c(hac[42])); 
 half_adder ha43(.x(has[35]), .y(hac[34]), .s(has[43]), .c(hac[43])); 
@@ -372,16 +388,73 @@ full_adder fa199(.x(dot[56]), .y(hac[41]),   .cin(fac[168]), .s(fas[199]), .c(fa
 half_adder ha51(.x(dot[54]), .y(fac[169]), .s(has[51]), .c(hac[51])); 
 /*************/
 /*stage 7 ****/
-assign result[0] = dot[26];
-assign result[1] = dot[27];
-assign result[2] = dot[37];
-assign result[3] = dot[45];
-assign result[4] = dot[55];
-assign result[5] = dot[57];
-assign result[6] = has[42];
-//half_adder ha51(.x(dot[54]), .y(fac[169]), .s(has[51]), .c(hac[51])); 
+assign z1[0] = dot[26];
+assign z1[1] = dot[27];
+assign z1[2] = dot[37];
+assign z1[3] = dot[45];
+assign z1[4] = dot[55];
+assign z1[5] = dot[57];
+assign z1[6] = has[42];
+assign z1[7] = has[43];
+assign z1[8] = has[44];
+assign z1[9] = has[45];
+assign z1[10] = has[46];
+assign z1[11] = has[47];
+assign z1[12] = has[48];
+assign z1[13] = has[49];
+assign z1[14] = has[50];
+assign z1[15] = fas[185];
+assign z1[16] = fas[186];
+assign z1[17] = fas[187];
+assign z1[18] = fas[188];
+assign z1[19] = fas[189];
+assign z1[20] = fas[190];
+assign z1[21] = fas[191];
+assign z1[22] = fas[192];
+assign z1[23] = fas[193];
+assign z1[24] = fas[194];
+assign z1[25] = fas[195];
+assign z1[26] = fas[196];
+assign z1[27] = fas[197];
+assign z1[28] = fas[198];
+assign z1[29] = fas[199];
+assign z1[30] = has[51];
 
+assign z2[0] = 0;
+assign z2[1] = 0;
+assign z2[2] = 0;
+assign z2[3] = 0;
+assign z2[4] = 0;
+assign z2[5] = 0;
+assign z2[6] = 0;
+assign z2[7] = hac[42];
+assign z2[8] = hac[43];
+assign z2[9] = hac[44];
+assign z2[10] = hac[45];
+assign z2[11] = hac[46];
+assign z2[12] = hac[47];
+assign z2[13] = hac[48];
+assign z2[14] = hac[49];
+assign z2[15] = hac[50];
+assign z2[16] = fac[185];
+assign z2[17] = fac[186];
+assign z2[18] = fac[187];
+assign z2[19] = fac[188];
+assign z2[20] = fac[189];
+assign z2[21] = fac[190];
+assign z2[22] = fac[191];
+assign z2[23] = fac[192];
+assign z2[24] = fac[193];
+assign z2[25] = fac[194];
+assign z2[26] = fac[195];
+assign z2[27] = fac[196];
+assign z2[28] = fac[197];
+assign z2[29] = fac[198];
+assign z2[30] = fac[199];
+assign z2[31] = hac[51];
 
+logic cout;
+carry_lookahead_adder32 car(.A(z1), .B(z2), .Sum(result), .C0(cout));
 
 
 
