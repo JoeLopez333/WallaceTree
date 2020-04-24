@@ -3,12 +3,12 @@ module WallaceTree (input logic Clk, Reset, Run, ClearA_LoadB,
 						  output logic [31:0] result,
 						  output logic [31:0] result1,
 						  output logic [31:0] result2,
-						  output logic [15:0] test,
-						  output logic [15:0] test2);
+						  output logic [31:0] z1,
+						  output logic [31:0] z2);
 						  
 
-		logic[31:0] z1 = 8'b10000111;
-		logic[31:0] z2 = 8'b01100111;
+		//logic[31:0] z1;
+		//logic[31:0] z2;
 		
 		logic pp[15:0][15:0]; //partial products
 
@@ -19,20 +19,20 @@ module WallaceTree (input logic Clk, Reset, Run, ClearA_LoadB,
 			pp[j][i] <= MUR[j] & MUD[i];
 			end
 			
-		always_comb begin
-			
-			int k;
-			for (k = 0; k <= 15; k = k+1)
-			test[k] <= pp[0][k];
-			
-		end
-		always_comb begin
-			
-			int l;
-			for (l = 0; l <= 15; l = l+1)
-			test2[l] <= pp[1][l];
-			
-		end
+//		always_comb begin
+//			
+//			int k;
+//			for (k = 0; k <= 15; k = k+1)
+//			test[k] <= pp[0][k];
+//			
+//		end
+//		always_comb begin
+//			
+//			int l;
+//			for (l = 0; l <= 15; l = l+1)
+//			test2[l] <= pp[1][l];
+//			
+//		end
 						  
 //half_adder ha1(.x(pp[2][2]), .y(pp[1][3]), .s(ha1s), .c(ha1c));
 //half_adder ha2(.x(pp[1][2]), .y(pp[0][3]), .s(ha2s), .c(ha2c));
