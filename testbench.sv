@@ -9,6 +9,7 @@ logic [31:0] result2;
 logic [15:0] MUR;
 logic [15:0] MUD;
 logic [31:0] z1, z2;
+integer error;
 
 WallaceTree wtree(.*);
 
@@ -24,10 +25,24 @@ initial begin : TEST
 	//Reset = 1;
 	//Run = 0;
 	//ClearA_LoadB = 1;
-	MUR = 16'b0011001100110011;
-	MUD = 16'b0000000000110000;
+	error = 0;
+	for (int i = 0; i < 128; i++)
+		for (int j = 0; j < 128; j++)
+		begin
+			MUR <= i;
+			MUD <= j;
+			if (result != MUR*MUD)
+				error = error+1;
+				
+		end
+			
+			
+//MUR = 16'b1011001100110011;
+//MUD = 16'b0000000000110000;
+
 	
 #20 ;
+#21 $display("error = %d", error);
 	
 end
 endmodule

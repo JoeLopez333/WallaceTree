@@ -6,17 +6,26 @@ module WallaceTree (input logic Clk, Reset, Run, ClearA_LoadB,
 						  output logic [31:0] z1,
 						  output logic [31:0] z2);
 						  
-
-		//logic[31:0] z1;
-		//logic[31:0] z2;
+		logic[31:0] intermediate_result;
+		logic[15:0] MUR1;
+		logic[15:0] MUD1;
+		logic[1:0] switcher; //specifies if we should two's complement the result
+		TCGenerator16 tcgen1(.IN(MUR), .OUT(MUR1), .switched(switcher[0]));
+		TCGenerator16 tcgen2(.IN(MUD), .OUT(MUD1), .switched(switcher[1]));
 		
 		logic pp[15:0][15:0]; //partial products
 
 		always_comb begin
+			
 			int i, j;
 			for (i = 0; i <= 15; i = i+1)
 			for (j = 0; j <= 15; j = j+1)
-			pp[j][i] <= MUR[j] & MUD[i];
+			pp[j][i] <= MUR1[j] & MUD1[i];
+			$display("MUR is %d", MUR);
+			$display("MUD is %d", MUD);
+
+			$display("MUR1 is %d", MUR1);
+			$display("MUD1 is %d", MUD1);
 			end
 			
 //		always_comb begin
@@ -419,6 +428,7 @@ assign z1[27] = fas[197];
 assign z1[28] = fas[198];
 assign z1[29] = fas[199];
 assign z1[30] = has[51];
+assign z1[31] = 0;
 
 assign z2[0] = 0;
 assign z2[1] = 0;
@@ -454,9 +464,8 @@ assign z2[30] = fac[199];
 assign z2[31] = hac[51];
 
 logic cout;
-carry_lookahead_adder32 car(.A(z1), .B(z2), .Sum(result), .C0(cout));
-
-
+carry_lookahead_adder32 car(.A(z1), .B(z2), .Sum(intermediate_result), .C0(cout));
+TCGenerator32 tcgen3(.IN(intermediate_result), .switch(switcher), .OUT(result));
 
 
 
