@@ -1,14 +1,12 @@
-module WallaceTree (input logic Clk, Reset, Run, ClearA_LoadB,
+module WallaceTree (
 						  input logic [15:0] MUR, MUD, //multiplier and multiplicand
-						  output logic [31:0] result,
-						  output logic [31:0] result1,
-						  output logic [31:0] result2,
-						  output logic [31:0] z1,
-						  output logic [31:0] z2);
+						  output logic [31:0] result);
 						  
 		logic[31:0] intermediate_result;
 		logic[15:0] MUR1;
 		logic[15:0] MUD1;
+		logic[31:0] z1;
+		logic[31:0] z2;
 		logic[1:0] switcher; //specifies if we should two's complement the result
 		TCGenerator16 tcgen1(.IN(MUR), .OUT(MUR1), .switched(switcher[0]));
 		TCGenerator16 tcgen2(.IN(MUD), .OUT(MUD1), .switched(switcher[1]));

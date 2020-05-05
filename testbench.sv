@@ -1,14 +1,10 @@
 module testbench();
 timeunit 10ns;
 timeprecision 1ns;
-
-logic Clk, Reset, Run, ClearA_LoadB;
+logic Clk;
 logic [31:0] result;
-logic [31:0] result1;
-logic [31:0] result2;
 logic [15:0] MUR;
 logic [15:0] MUD;
-logic [31:0] z1, z2;
 integer error;
 
 WallaceTree wtree(.*);
